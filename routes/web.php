@@ -12,42 +12,52 @@
 */
 
 Route::get('/', [
-    'uses' => 'PostController@getIndex',
-    'as' => 'blog.index'
+	'uses' => 'PostController@getIndex',
+	'as' => 'blog.index'
 ]);
 
 Route::get('post/{id}', [
-    'uses' => 'PostController@getPost',
-    'as' => 'blog.post'
+	'uses' => 'PostController@getPost',
+	'as' => 'blog.post'
 ]);
 
 Route::get('about', function () {
-    return view('other.about');
+	return view('other.about');
 })->name('other.about');
 
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('', [
-        'uses' => 'PostController@getAdminIndex',
-        'as' => 'admin.index'
-    ]);
+	Route::get('', [
+		'uses' => 'PostController@getAdminIndex',
+		'as' => 'admin.index'
+	]);
 
-    Route::get('create', [
-        'uses' => 'PostController@getAdminCreate',
-        'as' => 'admin.create'
-    ]);
+	Route::get('create', [
+		'uses' => 'PostController@getAdminCreate',
+		'as' => 'admin.create'
+	]);
 
-    Route::post('create', [
-        'uses' => 'PostController@postAdminCreate',
-        'as' => 'admin.create'
-    ]);
+	Route::post('create', [
+		'uses' => 'PostController@postAdminCreate',
+		'as' => 'admin.create'
+	]);
 
-    Route::get('edit/{id}', [
-        'uses' => 'PostController@getAdminEdit',
-        'as' => 'admin.edit'
-    ]);
+	Route::get('edit/{id}', [
+		'uses' => 'PostController@getAdminEdit',
+		'as' => 'admin.edit'
+	]);
 
-    Route::post('edit', [
-        'uses' => 'PostController@postAdminUpdate',
-        'as' => 'admin.update'
-    ]);
+	Route::post('edit', [
+		'uses' => 'PostController@postAdminUpdate',
+		'as' => 'admin.update'
+	]);
+
+	Route::get("delete/{id}", [
+		"uses" => "PostController@getAdminDelete",
+		"as" => "admin.delete"
+	]);
+
+	Route::get("like/{id}", [
+		"uses" => "PostController@getLikePost",
+		"as" => "blog.post.like"
+	]);
 });
